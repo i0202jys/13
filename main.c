@@ -1,20 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-int main() {
-    char *pc = NULL;
-    int i = 0;
+#include <string.h>
 
-    pc = (char*)malloc(100*sizeof(char));
-    if(pc == NULL){
-        printf("error");
-        exit(1);
-    }
-for(i=0;i<26;i++){
-    pc[i] = 'a'+i;
+struct Book {
+int number;
+char title[10];
+};
+
+int main(void) {
+
+struct Book *p;
+p = (struct Book*)malloc(2*sizeof(struct Book));
+
+if (p == NULL) {
+printf("error\n");
+return -1;
 }
-pc[i] = 0;
-printf("%s\n",pc);
-free(pc);
 
+p->number = 1;
+strcpy(p->title, "C Programming");
+
+(p+1)->number = 2;
+strcpy((p+1)->title, "Electronics");
+
+printf("%i : %s\n",p->number, p->title);
+printf("%i : %s\n",(p+1)->number, (p+1)->title);
+
+
+
+free(p);
 return 0;
 }
